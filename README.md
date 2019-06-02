@@ -1,1 +1,1 @@
-# animation-player
+https://julanick.github.io/animation-player

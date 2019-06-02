@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="src/styles.css">
+</head>
+
+<body>
+    <header class="conteiner card-header">
+        CodeJam-Pallete
+    </header>
+
+    <div class="container-fluid table-bordered main-wrapper">
+        <div class="row height100">
+            <div class="container col-2 pallete-wrapper">
+                <div class="container pallete-block">
+                    <div class="container ">
+                        <ul class="list-group">
+                            <li>
+                                <button id="paintActionBtn" class="btn">
+                                    <i class="fas fa-fill-drip"></i>
+                                    <span class="badge badge-primary">Paint bucket</span>
+                                </button>
+                            </li>
+                            <li>
+                                <button id="chooseColorActionBtn" class="btn">
+                                    <i class="fas fa-eye-dropper"></i>
+                                    <span class="badge badge-primary">Choose color</span>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    <hr>
+                    <div class="container">
+                        <ul class="list-group">
+                            <li>
+                                <button id="moveActionBtn" class="btn">
+                                    <i class="fas fa-arrows-alt"></i>
+                                    <span class="badge badge-primary"> Move</span>
+                                </button>
+                            </li>
+                            <li>
+                                <button id="transformActionBtn" class="btn">
+                                    <i class="fas fa-exchange-alt"></i>
+                                    <span class="badge badge-primary"> Transform</span>
+                                </button></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="container pallete-block">
+                    <div class="container">
+                        <ul class="list-group">
+                            <li class="d-inline-flex">
+                                <button id="currentColorBtnInd"
+                                    class="colorIndicator list-inline-item align-self-center"></button>
+                                <button id="currentColorBtn" type="button" class="btn list-inline-item">Current
+                                    collor</button>
+                            </li>
+                            <li class="d-inline-flex">
+                                <button id="prevColorBtnInd"
+                                    class="colorIndicator list-inline-item align-self-center"></button>
+                                <button id="prevColorBtn" type="button" class="btn">Previous color</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <hr>
+                    <div class="container">
+                        <ul class="list-group">
+                            <li class="d-inline-flex">
+                                <button id="colorBtn1Ind"
+                                    class="colorIndicator list-inline-item align-self-center"></button>
+                                <button id="colorBtn1" type="button" class="btn">Color #1</button>
+                            </li>
+                            <li class="d-inline-flex">
+                                <button id="colorBtn2Ind"
+                                    class="colorIndicator list-inline-item align-self-center"></button>
+                                <button id="colorBtn2" type="button" class="btn">Color #2</button>
+                            </li>
+                            <li class="d-inline-flex">
+                                <button id="colorBtn3Ind"
+                                    class="colorIndicator list-inline-item align-self-center"></button>
+                                <button id="colorBtn3" type="button" class="btn">Color #3</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="conteiner col-2 height100 p-3">
+                <ul id="frames" class="frames-conteiner pallete-block">
+
+                </ul>
+
+                <button class="btn btn-primary m-2" onclick="createFrame()">Add new frame +</button>
+            </div>
+
+            <div id="palette-wrapper" class="conteiner col-6">
+                <div id="palette" class="canvas-grid">
+                    <div id="grid-cell-1" class="canvas-grid-item"></div>
+                    <div id="grid-cell-2" class="canvas-grid-item"></div>
+                    <div id="grid-cell-3" class="canvas-grid-item"></div>
+                    <div id="grid-cell-4" class="canvas-grid-item"></div>
+                    <div id="grid-cell-5" class="canvas-grid-item"></div>
+                    <div id="grid-cell-6" class="canvas-grid-item"></div>
+                    <div id="grid-cell-7" class="canvas-grid-item"></div>
+                    <div id="grid-cell-8" class="canvas-grid-item"></div>
+                    <div id="grid-cell-9" class="canvas-grid-item"></div>
+                </div>
+            </div>
+
+            <div class="conteiner col-2 mt-4">
+                <div class="animation-conteiner pallete-block">
+                    <div id="animation" class="animation">
+                    </div>
+                </div>
+
+                <input id="fps" type="range" class="form-control-range mt-2" aria-valuemin="1" aria-valuemax="24">
+
+                <div id="fps-value" style="text-align: center; padding: 10px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script id="frameTemplate" type="text/html">
+        <div id="#id#" class="frame" style="background-image: url(#background-image#)">
+                <div>
+                    <div class="frame-position">#position#</div>
+                </div>
+                <div></div>
+                <button onclick="deleteFrame(this)">Del</button>
+                <div></div>
+                <div></div>
+                <div></div>
+                <button onclick="copyFrame(this)">Copy</button>
+                <div></div>
+                <div></div>
+        </div>
+    </script>
+
+    <script src="https://unpkg.com/vanilla-picker@2"></script>
+    <script src="src/script.js"></script>
+</body>
+
+</html>
